@@ -23,11 +23,11 @@ deck = shuffle(deck);
 
 // Initialize the game
 function initGame() {
+    
     deck.forEach(value => {
         const card = document.createElement('div');
         card.classList.add('card');
         card.textContent = value;
-        console.log(value)
         console.log(card)
         card.setAttribute('data-value', value);
         card.addEventListener('click', flipCard);
@@ -111,8 +111,16 @@ function resetBoard() {
 function endGame() {
     clearInterval(interval);
     gameOverText.classList.remove('hidden');
-    initGame();
+    setTimeout(() => {
+        playAgain()
+    },10000)
 }
 
+function playAgain(){
+    const contains = document.querySelector('#game-container');
+    const cards = contains.querySelectorAll('div.card');
+    cards.forEach(card =>
+        card.classList.remove('card'));
+}
 
 initGame();
