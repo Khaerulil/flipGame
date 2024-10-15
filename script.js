@@ -23,7 +23,7 @@ deck = shuffle(deck);
 
 // Initialize the game
 function initGame() {
-    
+
     deck.forEach(value => {
         const card = document.createElement('div');
         card.classList.add('card');
@@ -113,14 +113,27 @@ function endGame() {
     gameOverText.classList.remove('hidden');
     setTimeout(() => {
         playAgain()
-    },10000)
+    },60000)
 }
 
-function playAgain(){
-    const contains = document.querySelector('#game-container');
-    const cards = contains.querySelectorAll('div.card');
-    cards.forEach(card =>
-        card.classList.remove('card'));
+function playAgain() {
+    gameContainer.innerHTML = '';
+    
+    cards = [];
+    firstCard = null;
+    secondCard = null;
+    hasFlippedCard = false;
+    lockBoard = false;
+    matchedCards = 0;
+    moves = 0;
+    timer = 0;
+    
+    movesDisplay.textContent = 'Moves: 0';
+    timerDisplay.textContent = 'Time: 0s';
+    gameOverText.classList.add('hidden');
+
+    deck = shuffle([...cardValues, ...cardValues]);
+    initGame();
 }
 
 initGame();
